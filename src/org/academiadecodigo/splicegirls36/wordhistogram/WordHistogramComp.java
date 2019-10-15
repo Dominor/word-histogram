@@ -2,31 +2,18 @@ package org.academiadecodigo.splicegirls36.wordhistogram;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class WordHistogramComp implements Iterable<String> {
 
     String[] strings;
-    private HashMap<String, Integer> words;
+    private Map<String, Integer> words;
 
     WordHistogramComp(String string) {
         this.strings = string.split(" ");
         this.words = new HashMap<>(strings.length);
-        init();
-    }
-
-    void init() {
-        int count = 1;
-        for (int i = 0; i < strings.length; i++) {
-            for (int j = 0; j < strings.length; j++) {
-                if (j == i) {
-                    continue;
-                }
-                if (strings[i] == strings[j]) {
-                    count++;
-                }
-            }
-            words.put(strings[i], count);
-            //count = 1;
+        for (String word: string.split(" ")) {
+            words.put(word, words.containsKey(word) ? words.get(word) + 1 : 1);
         }
     }
 
